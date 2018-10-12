@@ -24,10 +24,23 @@
     <div>
         <h1>@seriestTitle</h1>
         <h2>号码 #@issuerNumber</h2>
+        @if (artists.Length > 0)
+        {
+            <h5>作者：</h5>
+            <div>
+                <ul>
+                    @foreach (var artist in artists)
+                    {
+
+                        <li>
+                            @artist
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
         <h5>介绍</h5>
         <div>@Html.Raw(description)</div>
-        <h5>作者：</h5>
-        <div>@artists</div>
     </div>
 </body>
 </html>
