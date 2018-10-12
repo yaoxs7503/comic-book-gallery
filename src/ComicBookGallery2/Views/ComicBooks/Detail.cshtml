@@ -1,15 +1,5 @@
 ﻿@{
     Layout = null;
-    var seriestTitle = "The Amazing Spider-Man";
-    var issuerNumber = 700;
-    var description = "<p>Final issue Witness <h2>the final hour</h2></p>";
-    var artists = new string[] {
-"Script: Dan Slott",
-"Pencils: Humberto Ramos",
-"Inks: Victor Olazaba",
-"Colors: Edgar Delgado",
-"Letters: Chris Eliopoulos"
-};
 
 }
 
@@ -22,14 +12,17 @@
 </head>
 <body>
     <div>
-        <h1>@seriestTitle</h1>
-        <h2>号码 #@issuerNumber</h2>
-        @if (artists.Length > 0)
+        <h1>@ViewBag.seriestTitle</h1>
+        <h2>号码 #@ViewBag.IssueNumber</h2>
+
+        <h5>介绍：</h5>
+        <div>@Html.Raw(ViewBag.Description)</div>
+        @if (ViewBag.Artists.Length > 0)
         {
             <h5>作者：</h5>
             <div>
                 <ul>
-                    @foreach (var artist in artists)
+                    @foreach (var artist in ViewBag.Artists)
                     {
 
                         <li>
@@ -39,8 +32,6 @@
                 </ul>
             </div>
         }
-        <h5>介绍</h5>
-        <div>@Html.Raw(description)</div>
     </div>
 </body>
 </html>
