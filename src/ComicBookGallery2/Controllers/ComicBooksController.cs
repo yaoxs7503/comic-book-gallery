@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicBookGallery2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,18 +11,34 @@ namespace ComicBookGallery2.Controllers
     {
         public ActionResult Detail()
         {
-            ViewBag.SeriestTitle = "The Amazing Spider-Man";
-            ViewBag.IssueNumber = 700;
-            ViewBag.Description = "<p>Final issue Witness <h2>the final hour</h2></p>";
-            ViewBag.Artists = new string[]
+            var comicBook = new ComicBook()
             {
-            "Script: Dan Slott",
-            "Pencils: Humberto Ramos",
-            "Inks: Victor Olazaba",
-            "Colors: Edgar Delgado",
-            "Letters: Chris Eliopoulos"
+                SeriesTitle = "The Amazing Spider-Man",
+                IssueNumber = 700,
+                DescriptionHtml = "<p>Final issue Witness <h2>the final hour</h2></p>",
+                Artists = new Artist[]
+                {
+                    new Artist() {Name="Dan Slott",Role="Script"},
+                    new Artist() {Name="Humberto Ramos",Role="Pencils"},
+                    new Artist() {Name="Victor Olazaba",Role="Inks"},
+                    new Artist() {Name="Victor Olazaba",Role="Inks"},
+                    new Artist() {Name="Chris Eliopoulos",Role="Letters"},
+                }
             };
-            return View();
+
+            //ViewBag.SeriesTitle = "";
+            //ViewBag.IssueNumber = 700;
+            //ViewBag.Description = "<p>Final issue Witness <h2>the final hour</h2></p>";
+            //ViewBag.Artists = new string[]
+            //{
+            //"Script: Dan Slott",
+            //"Pencils: Humberto Ramos",
+            //"Inks: Victor Olazaba",
+            //"Colors: Edgar Delgado",
+            //"Letters: Chris Eliopoulos"
+            //};
+            //ViewBag.ComicBook = comicBook;
+            return View(comicBook);
             //if (DateTime.Today.DayOfWeek == DayOfWeek.Friday)
             //{
             //    return Redirect("/");
