@@ -9,23 +9,15 @@ namespace ComicBookGallery2.Controllers
 {
     public class ComicBooksController : Controller
     {
-        public ActionResult Detail()
-        {
-            var comicBook = new ComicBook()
-            {
-                SeriesTitle = "The Amazing Spider-Man",
-                IssueNumber = 700,
-                DescriptionHtml = "<p>Final issue Witness <h2>the final hour</h2></p>",
-                Artists = new Artist[]
-                {
-                    new Artist() {Name="Dan Slott",Role="Script"},
-                    new Artist() {Name="Humberto Ramos",Role="Pencils"},
-                    new Artist() {Name="Victor Olazaba",Role="Inks"},
-                    new Artist() {Name="Victor Olazaba",Role="Inks"},
-                    new Artist() {Name="Chris Eliopoulos",Role="Letters"},
-                }
-            };
+        private ComicBookRepository _comciBookRepository = null;
 
+        public ComicBooksController()
+        {
+            _comciBookRepository = new ComicBookRepository();
+        }
+
+        public ActionResult Detail(int? id)
+        {
             //ViewBag.SeriesTitle = "";
             //ViewBag.IssueNumber = 700;
             //ViewBag.Description = "<p>Final issue Witness <h2>the final hour</h2></p>";
@@ -38,6 +30,12 @@ namespace ComicBookGallery2.Controllers
             //"Letters: Chris Eliopoulos"
             //};
             //ViewBag.ComicBook = comicBook;
+            if (id == null)
+
+            {
+                return HttpNotFound();
+            }
+            var comicBook = _comciBookRepository.GetComicBook((int)id);
             return View(comicBook);
             //if (DateTime.Today.DayOfWeek == DayOfWeek.Friday)
             //{

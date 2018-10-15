@@ -4,35 +4,38 @@
     ViewBag.Title = "Comic Book Detail";
 }
 
-<!DOCTYPE html>
+<h2>@Model.DisplayText</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="well">
+            <h5><label>书名：</label>@Model.SeriesTitle</h5>
+            <h5><label>号码 #:</label>@Model.IssueNumber</h5>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-        <h1>@Model.SeriesTitle</h1>
-        <h2>号码 #@Model.IssueNumber</h2>
+            <h5>
+                <label>是否接受群众喜欢：</label>@(Model.Favorite ? "喜欢" : "不喜欢")
+            </h5>
+            <h5><label>书名的表述：</label></h5>
+            @Html.Raw(Model.DescriptionHtml)
+            @if (Model.Artists.Length > 0)
+            {
+                <h5>作者：</h5>
+                <div>
+                    <ul>
+                        @foreach (var artist in Model.Artists)
+                        {
 
-        <h5>介绍：</h5>
-        <div>@Html.Raw(Model.DescriptionHtml)</div>
-        @if (Model.Artists.Length > 0)
-        {
-            <h5>作者：</h5>
-            <div>
-                <ul>
-                    @foreach (var artist in Model.Artists)
-                    {
-
-                        <li>
-                            @artist.Role: @artist.Name
-                        </li>
-                    }
-                </ul>
-            </div>
-        }
+                            <li>
+                                @artist.Role: @artist.Name
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+        <h5>描述:</h5>
+        <p>@Html.Raw(Model.DescriptionHtml)</p>
     </div>
-</body>
-</html>
+    <div class="col-md-6">
+        <img src="~/Images/@Model.CoverImageFileName" alt="@Model.DisplayText" class="img-responsive" />
+    </div>
+</div>
